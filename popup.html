@@ -1,25 +1,12 @@
-<!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
+    <title>Wilfred's spellbook</title>
     <style>
       body {
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
         font-size: 100%;
-      }
-      #status {
-        /* avoid an excessively wide status text */
-        margin: 5px 0;
-        text-overflow: ellipsis;
-        overflow: hidden;
         max-width: 400px;
       }
-
       .spellLibrary button.spell {
         border-radius: 3px;
         border: 0;
@@ -37,11 +24,11 @@
         color: #fff38b;
       }
 
-      .spellLibrary button.spell.alt {
+      .spellLibrary button.spell:nth-child(odd){
         background: #ff0000;
       }
 
-      .spellLibrary button.spell.alt:hover {
+      .spellLibrary button.spell:nth-child(odd):hover {
         background: #aa0000;
       }
 
@@ -53,16 +40,7 @@
       .spellLibrary button.spell.white:hover {
         background: #BBB;
       }
-
-
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
      <script src="jquery.min.js"></script>
     <script src="functions.js"></script>
   </head>
@@ -72,11 +50,11 @@
     </div> -->
     <div class="spellLibrary">
       <button id="invertSpell" class="spell">Bazinga</button>
-      <button id="blur1Spell" class="spell alt">Flipendo lvl 1</button>
+      <button id="blur1Spell" class="spell">Flipendo I</button>
+      <button id="blur4Spell" class="spell">Flipendo IV</button>
       <button id="saturateSpell" class="spell">Koen'k</button>
-      <button id="blur4Spell" class="spell alt">Flipendo lvl 4</button>
 
-      <button id="clearSpell" class="spell white">clear</button>
+      <button id="clearSpell" class="spell white">reset</button>
     </div>
   </body>
 </html>

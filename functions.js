@@ -1,14 +1,6 @@
-var currentBuff = "";
-
 function wizardFilter(spell) {
 
   if(spell) {
-
-    if (spell == currentBuff) {
-      currentBuff = "none";
-    } else {
-      currentBuff = spell;
-    }
 
     chrome.tabs.query ({ currentWindow: true, active: true }, function(tabs) {
       var activeTab = tabs[0];
@@ -17,7 +9,6 @@ function wizardFilter(spell) {
         code: "$('body').css('filter','"+spell+"')"
       }, function (results) {
         console.log('filterspell '+spell+' ... cast!')
-        currentBuff = spell;
       });
 
     });
@@ -30,6 +21,8 @@ function wizardFilter(spell) {
 
 $(document).ready(function(){
 
+  var currentBuff = "";
+
   chrome.tabs.query ({ currentWindow: true, active: true }, function(tabs) {
    var activeTab = tabs[0];
      chrome.tabs.executeScript(activeTab.id, {
@@ -40,20 +33,34 @@ $(document).ready(function(){
      });
   });
 
+  function validateSpell(spell) {
+    if(currentBuff == spell) {
+      spell = 'none';
+    }
+    wizardFilter(spell);
+    currentBuff = spell;
+  }
+
   $('#invertSpell').click(function(){
-    wizardFilter('invert(100%)');
+    validateSpell('invert(100%)');
   });
 
-  $('#clearSpell').click(function(){
-    wizardFilter('none');
-  });
   $('#blur1Spell').click(function(){
-    wizardFilter('blur(1px)');
+    validateSpell('blur(1px)');
   });
+
   $('#saturateSpell').click(function(){
-    wizardFilter('saturate(1000%)');
+    validateSpell('saturate(1000%)');
   });
+
   $('#blur4Spell').click(function(){
-    wizardFilter('blur(4px)');
+    validateSpell('blur(4px)');
   });
+
+    $('#clearSpell').click(function(){
+      wizardFilter('none');
+      currentBuff = 'none';
+    });
+
+
 });
