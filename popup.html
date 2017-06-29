@@ -29,6 +29,8 @@
         transition: 0.4s;
         cursor: pointer;
         width: 100%;
+        margin: 4px;
+        min-width: 1.6rem;
       }
       .spellLibrary button.spell:hover{
         background: #440066;
@@ -41,6 +43,15 @@
 
       .spellLibrary button.spell.alt:hover {
         background: #aa0000;
+      }
+
+      .spellLibrary button.spell.white {
+        background: #DDD;
+        color: #222;
+      }
+
+      .spellLibrary button.spell.white:hover {
+        background: #BBB;
       }
 
 
@@ -61,6 +72,11 @@
     </div> -->
     <div class="spellLibrary">
       <button id="invertSpell" class="spell">Bazinga</button>
+      <button id="blur1Spell" class="spell alt">Flipendo lvl 1</button>
+      <button id="saturateSpell" class="spell">Koen'k</button>
+      <button id="blur4Spell" class="spell alt">Flipendo lvl 4</button>
+
+      <button id="clearSpell" class="spell white">clear</button>
     </div>
   </body>
 </html>

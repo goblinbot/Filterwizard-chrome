@@ -4,64 +4,51 @@ function wizardFilter(spell) {
 
   if(spell) {
 
-    chrome.tabs.query (
-     { currentWindow: true, active: true },
-         function(tabs) {
-             var activeTab = tabs[0];
-             var title = activeTab.title;
-             console.log(JSON.stringify(title));
-      });
-
-    $('body').css('filter','none');
-
-    if (spell == 'clear' || spell == currentBuff) {
-
-      currentBuff = "";
-
-    } else {
-
-      currentBuff = spell;
-
-      if (spell == 'invert') {
-
-        $('body').css('filter','invert(100%)');
-        $(activeTab.body).css('filter','invert(100%)');
-
-      } else if (spell == 'blur1px') {
-
-        $('body').css('filter','blur(1px)');
-
-      } else {
-        currentBuff = "";
-        console.log('wizardfilter: spell failed!')
-      }
-
+    if (spell == 'none' || spell == currentBuff) {
+      currentBuff = "none";
     }
 
+    chrome.tabs.query ({ currentWindow: true, active: true }, function(tabs) {
+      var activeTab = tabs[0];
 
+      chrome.tabs.executeScript(activeTab.id, {
+        code: "$('body').css('filter','"+spell+"')"
+      }, function (results) {
+        console.log('filterspell '+spell+' ... cast!')
+        currentBuff = spell;
+      });
 
+    });
 
-    // document.getElementsByTagName("body")[0].style = "filter: "+spell+"("+level+")";
-    // $('body').css('filter',spell+': '+spell+'('+level+')');
-
-    // console.log('filter',spell+': '+spell+'('+level+');');
+  } else {
+    return false;
   }
 
 }
 
 $(document).ready(function(){
-  // document.getElementById('invertSpell').addEventListener('click',wizardFilter('invert','100%'),false);
-  $('#invertSpell').click(function(){
-    wizardFilter('invert');
-  });
-  $('#clearSpell').click(function(){
-    wizardFilter('clear');
-  });
-  $('#satanBlurSpell').click(function(){
-    wizardFilter('blur1px');
+
+  chrome.tabs.query ({ currentWindow: true, active: true }, function(tabs) {
+   var activeTab = tabs[0];
+     chrome.tabs.executeScript(activeTab.id, {
+       file: 'functions.js'
+     });
   });
 
-  // chrome.tabs.getCurrent(function(tab) {
-  //   alert(tab.title);
-  // });
+  $('#invertSpell').click(function(){
+    wizardFilter('invert(100%)');
+  });
+
+  $('#clearSpell').click(function(){
+    wizardFilter('none');
+  });
+  $('#blur1Spell').click(function(){
+    wizardFilter('blur(1px)');
+  });
+  $('#saturateSpell').click(function(){
+    wizardFilter('saturate(1000%)');
+  });
+  $('#blur4Spell').click(function(){
+    wizardFilter('blur(4px)');
+  });
 });
