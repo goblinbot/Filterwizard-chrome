@@ -14,11 +14,36 @@
       }
       #status {
         /* avoid an excessively wide status text */
-        white-space: pre;
+        margin: 5px 0;
         text-overflow: ellipsis;
         overflow: hidden;
         max-width: 400px;
       }
+
+      .spellLibrary button.spell {
+        border-radius: 3px;
+        border: 0;
+        color: #FFF;
+        padding: 10px;
+        background: #880088;
+        transition: 0.4s;
+        cursor: pointer;
+        width: 100%;
+      }
+      .spellLibrary button.spell:hover{
+        background: #440066;
+        color: #fff38b;
+      }
+
+      .spellLibrary button.spell.alt {
+        background: #ff0000;
+      }
+
+      .spellLibrary button.spell.alt:hover {
+        background: #aa0000;
+      }
+
+
     </style>
 
     <!--
@@ -27,10 +52,15 @@
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
-    <script src="popup.js"></script>
+     <script src="jquery.min.js"></script>
+    <script src="functions.js"></script>
   </head>
   <body>
-    <div id="status"></div>
-    <img id="image-result" hidden>
+    <!-- <div id="status">
+      Spells
+    </div> -->
+    <div class="spellLibrary">
+      <button id="invertSpell" class="spell">Bazinga</button>
+    </div>
   </body>
 </html>
