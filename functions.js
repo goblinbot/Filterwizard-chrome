@@ -4,8 +4,10 @@ function wizardFilter(spell) {
 
   if(spell) {
 
-    if (spell == 'none' || spell == currentBuff) {
+    if (spell == currentBuff) {
       currentBuff = "none";
+    } else {
+      currentBuff = spell;
     }
 
     chrome.tabs.query ({ currentWindow: true, active: true }, function(tabs) {
@@ -30,6 +32,9 @@ $(document).ready(function(){
 
   chrome.tabs.query ({ currentWindow: true, active: true }, function(tabs) {
    var activeTab = tabs[0];
+     chrome.tabs.executeScript(activeTab.id, {
+       file: 'jquery.min.js'
+     });
      chrome.tabs.executeScript(activeTab.id, {
        file: 'functions.js'
      });
