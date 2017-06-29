@@ -2,9 +2,8 @@
 
 *CSS filter your browser. Because why not?*
 
-Currently planned filters:
-- blur
-- saturate
-- invert
+todo:
 - hue-rotate
 - contrast
+
+Download "Filterwizard-chrome.crx" for the plugin.
